@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multiview Redirect</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+    textarea {
+      width: 100%;
+      max-width: 600px;
+      height: 150px;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      font-size: 1rem;
+      resize: none;
+    }
+    button {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Masukkan Link YouTube Livestream</h2>
+  <textarea id="youtubeLinks" placeholder="Satu link per baris..."></textarea>
+  <button onclick="redirectToMultiview()">Lihat Multiview</button>
+
+  <script>
+    function redirectToMultiview() {
+      const input = document.getElementById('youtubeLinks').value.trim();
+      const links = input.split('\n').filter(Boolean);
+      if (links.length === 0) {
+        alert("Masukkan setidaknya satu link YouTube.");
+        return;
+      }
+
+      const url = new URL("https://draconiboss.github.io/multiviewstream/");
+      url.searchParams.set('links', links.join(','));
+      window.location.href = url.toString();
+    }
+  </script>
+
+</body>
+</html>
